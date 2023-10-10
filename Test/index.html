@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+        <link rel="stylesheet" href="styleTest.css">
+        <script src="login.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Welcome To My Website</h1>
+            </div>
+            <div class="headings">
+                <a href="index.html" class="item">Home</a>
+                <a href="about.html" class="item">About</a>
+            </div>
+            <div class="form">
+                <form>
+                    <label for="username">Username: </label>
+                    <input id="username" required type="text" name="username" placeholder="Username...">
+                    <span id="usrname-error" class="error">Invalid Usrname</span>
+                    <label for="pass">Password: </label>
+                    <input id="password" required type="password" name="pass" placeholder="Password...">
+                    <span id="pass-error" class="error">Invalid Password</span>
+                    <input name="show" type="checkbox" id="show" onclick="ShowPassword()">
+                    <label for="show">Show Password</label>
+                    <input type="submit" value="Submit" onclick="Submit()">
+                    <a href="forgotPassword.html" class="link">Forget Password?</a>
+                    <a href="signUp.html" class="link">Don't have an account? Create one</a>
+                </form>
+            </div>
+        </div>
+        <script>
+            function Submit() {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                let error = false;
+                if(username === null || username === '' || username === undefined) {
+                    document.getElemenyId('usrname-error').style.display = 'block';
+                    error = true;
+                }
+                else
+                    document.getElementById('usrname-error').style.display = 'none';
+                if(password === null || password === '' || password === undefined) {
+                    document.getElementById('pass-error').style.display = 'block';
+                    error = true;
+                }
+                else
+                    document.getElementById('pass-error').style.display = 'none';
+                if(error)
+                    return;
+                const formInput = {'username' : username, 'password' : password};
+                const permission = Login(formInput);
+                console.log(document.getElementsByClassName('header')[0].innerHTML);
+                const header = document.getElementsByClassName('header')[0].innerHTML += '<h1>Hello</h1>'
+                if(permission) {
+                    alert('Welcome ' + username);
+                   // window.location.href = 'home.html';
+                }
+            }
+            function ShowPassword() {
+                const isChecked = document.getElementById('show').checked;
+                let paswordInput = document.getElementById('password');
+                if(isChecked)
+                    paswordInput.type = 'text';
+                else
+                    paswordInput.type = 'password';
+            }
+        </script>
+    </body>
+</html>
